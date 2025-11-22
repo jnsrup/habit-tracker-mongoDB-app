@@ -26,3 +26,46 @@
 *{
   font-family: sans-serif;
 }
+
+
+.userBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  
+  align-items: center;
+}
+
+.profile-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-img {
+  width: 60px;
+  
+  border-radius: 50%;
+}
+
+.dropdown2 {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: auto;
+  background: #e8e7e7;
+  color: #333;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 14px rgba(0,0,0,0.2);
+  z-index: 200;
+}
+
+.logout-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  background: crimson;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
