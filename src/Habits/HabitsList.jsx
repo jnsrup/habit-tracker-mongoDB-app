@@ -11,10 +11,12 @@ const HabitsList = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-5 py-10 justify-items-center">
+    <div className="">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-5 py-10 justify-items-center">
       {habits.map((habit) => (
         <HabitCard key={habit._id} habit={habit} />
       ))}
+    </div>
     </div>
   );
 };

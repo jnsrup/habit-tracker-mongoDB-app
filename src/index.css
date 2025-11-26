@@ -69,3 +69,27 @@
   border: none;
   border-radius: 5px;
 }
+
+/* streakBar */
+.streak-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff8c00;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-weight: 600;
+}
+.streak-container {
+  width: 100%;
+  height: 10px;
+  background: #eee;
+  border-radius: 20px;
+}
+
+.streak-bar {
+  height: 100%;
+  background: orange;
+  border-radius: 20px;
+}

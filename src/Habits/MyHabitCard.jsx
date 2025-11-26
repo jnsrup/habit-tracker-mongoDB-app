@@ -1,73 +1,159 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import Swal from "sweetalert2";
+import axios from "axios";
+import Lottie from "lottie-react";
+import successAnimation from "../assets/Completed Successfully.json";
 
 const MyHabitCard = ({ habit }) => {
   const { user } = useContext(AuthContext);
   const [habits, setHabits] = useState([]);
   const [editingHabit, setEditingHabit] = useState(null);
 
-  // Fetch logged-in user's habits
+  const [showAnimation, setShowAnimation] = useState(false);
+
+  // Form states
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [reminderTime, setReminderTime] = useState("");
+  const [image, setImage] = useState("");
+
+  // Load user's habits
   const loadMyHabits = async () => {
     const res = await fetch(`http://localhost:3000/habits?email=${user.email}`);
     const data = await res.json();
     setHabits(data);
+    
   };
 
   useEffect(() => {
     loadMyHabits();
-  }, [user]);
+  }, []);
 
-  // Handle Edit + Open Modal
+  // Open edit modal
   const openEditModal = (habit) => {
     setEditingHabit(habit);
+
+    setTitle(habit.title);
+    setDescription(habit.description);
+    setCategory(habit.category);
+    setReminderTime(habit.reminderTime);
+    setImage(habit.image);
+
     document.getElementById("edit_modal").showModal();
   };
 
-  // Handle Update
+  // Update Habit
   const handleUpdateHabit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(
-      `http://localhost:3000/habits/${editingHabit._id}`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editingHabit),
+    const updateHabit = {
+      title,
+      description,
+      category,
+      reminderTime,
+      image,
+    };
+
+    try {
+      const res = await axios.put(
+        `http://localhost:3000/habits/${editingHabit._id}`,
+        updateHabit
+      );
+
+      if (res.data.matchedCount > 0) {
+        Swal.fire({
+          icon: "success",
+          title: "Habit Updated!",
+        });
+
+        loadMyHabits();
+        document.getElementById("edit_modal").close();
       }
-    );
-
-    const data = await res.json();
-
-    if (data.modifiedCount >= 0) {
-      alert("Habit updated successfully!");
-      document.getElementById("edit_modal").close();
-      setEditingHabit(null);
-      loadMyHabits();
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Update Failed",
+        text: error.response?.data?.message || "Something went wrong!",
+      });
     }
   };
 
-  // Handle Delete
-  const handleDeleteHabit = async (id) => {
-    if (!confirm("Are you sure you want to delete this habit?")) return;
+  // Delete Habit
+  const handleDeleteHabit = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This habit will be deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await fetch(`http://localhost:3000/habits/${id}`, {
+          method: "DELETE",
+        });
 
-    const res = await fetch(`http://localhost:3000/habits/${id}`, {
-      method: "DELETE",
+        const data = await res.json();
+        if (data.deletedCount > 0) {
+          Swal.fire("Deleted!", "Habit removed successfully.", "success");
+          loadMyHabits();
+        }
+      }
     });
+  };
 
+  // Daily Streak Handler
+  const handleComplete = async (id) => {
+    const res = await fetch(`http://localhost:3000/habits/${id}/complete`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+    });
+    
     const data = await res.json();
+    console.log("Streak update:", data);
+    
 
-    if (data.deletedCount > 0) {
-      loadMyHabits();
-    }
+    // Refresh data
+    loadMyHabits();
+
+    // Lottie animation
+    setShowAnimation(true);
+    setTimeout(() => setShowAnimation(false), 1500);
+
+    Swal.fire({
+      icon: "success",
+      title: "Daily Habit Completed!",
+      timer: 1200,
+      showConfirmButton: false,
+    });
   };
 
   return (
     <>
-      {/* Habit Card */}
-      <div className="border p-4 rounded-lg shadow-md mb-4">
+      <div className="">
+         {/* Habit Card */}
+      <div className=" relative w-fit p-6 rounded-lg shadow-2xl mb-4">
+        <img src={habit.image} alt="" className=" w-100 rounded mb-3" />
         <h2 className="text-xl font-bold">{habit.title}</h2>
         <p className="text-gray-700">{habit.description}</p>
 
+        
+
+        {/* Duolingo-style streak progress */}
+        <div className="flex gap-1 mt-2">
+
+          {[...Array(7)].map((_, i) => (
+            <div
+              key={i}
+              className={`h-5 w-5 rounded ${
+                i < habit.streakCount % 7 ? "bg-green-500" : "bg-gray-300"
+              }`}
+            ></div>
+          ))}
+        </div>
+
+        {/* Buttons */}
         <div className="mt-4 flex gap-3">
           <button
             onClick={() => openEditModal(habit)}
@@ -82,39 +168,68 @@ const MyHabitCard = ({ habit }) => {
           >
             Delete
           </button>
+
+          <button
+            onClick={() => handleComplete(habit._id)}
+            className="bg-teal-500 text-white px-4 py-2 rounded"
+          >
+            Daily Complete
+          </button>
         </div>
+
+        {/* Lottie Animation */}
+        {showAnimation && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white/70 rounded-lg z-20">
+            <Lottie animationData={successAnimation} loop={false} style={{ width: 200 }} />
+          </div>
+        )}
       </div>
 
       {/* Edit Modal */}
       <dialog id="edit_modal" className="modal">
-        <form
-          onSubmit={handleUpdateHabit}
-          className="modal-box flex flex-col gap-4"
-        >
+        <form onSubmit={handleUpdateHabit} className="modal-box flex flex-col gap-4">
           <h3 className="font-bold text-lg">Edit Habit</h3>
 
           <input
             type="text"
-            className="input input-bordered w-full"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             placeholder="Title"
-            value={editingHabit?.title || ""}
-            onChange={(e) =>
-              setEditingHabit({ ...editingHabit, title: e.target.value })
-            }
-            required
+            className="input input-bordered"
           />
 
           <textarea
-            className="textarea textarea-bordered w-full"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
-            value={editingHabit?.description || ""}
-            onChange={(e) =>
-              setEditingHabit({
-                ...editingHabit,
-                description: e.target.value,
-              })
-            }
-            required
+            className="textarea textarea-bordered"
+          />
+
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="select select-bordered"
+          >
+            <option>Morning</option>
+            <option>Work</option>
+            <option>Fitness</option>
+            <option>Evening</option>
+            <option>Study</option>
+          </select>
+
+          <input
+            type="time"
+            value={reminderTime}
+            onChange={(e) => setReminderTime(e.target.value)}
+            className="input input-bordered"
+          />
+
+          <input
+            type="text"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            placeholder="Image URL"
+            className="input input-bordered"
           />
 
           <button type="submit" className="btn btn-primary w-full">
@@ -130,6 +245,7 @@ const MyHabitCard = ({ habit }) => {
           </button>
         </form>
       </dialog>
+      </div>
     </>
   );
 };

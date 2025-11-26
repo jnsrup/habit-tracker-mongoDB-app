@@ -17,7 +17,7 @@ const MyHabits = () => {
   }, [user]);
 
   return (
-    <div className="p-5">
+    <div className="w-11/12 mx-auto ">
       <h2 className="text-xl font-bold mb-4">My Habits</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

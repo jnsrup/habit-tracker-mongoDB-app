@@ -12,11 +12,14 @@ import HabitCard from "../Habits/HabitCard";
 import AddHabits from "../Habits/AddHabits";
 import MyHabits from "../Habits/MyHabits";
 import MyHabitCard from "../Habits/MyHabitCard";
+import ErrorPage from "../ErrorPage/ErrorPage";
+import Loader from "../Loader/Loader";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
@@ -54,6 +57,7 @@ const router = createBrowserRouter([
       {
         path: "/MyHabits",
         Component: MyHabits,
+        loader:Loader
       },
       {
         path: "/HabitsPage",
