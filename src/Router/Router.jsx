@@ -14,6 +14,7 @@ import MyHabits from "../Habits/MyHabits";
 import MyHabitCard from "../Habits/MyHabitCard";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import Loader from "../Loader/Loader";
+import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +45,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/HabitsList",
-        Component: HabitsList,
+        Component:HabitsList
+        
       },
       {
         path: "/HabitCard",
@@ -52,12 +54,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/AddHabits",
-        Component: AddHabits,
+        element:(<PrivateRoute><AddHabits></AddHabits></PrivateRoute>)
       },
       {
         path: "/MyHabits",
-        Component: MyHabits,
-        loader:Loader
+        element:(<PrivateRoute><MyHabits></MyHabits></PrivateRoute>)
       },
       {
         path: "/HabitsPage",

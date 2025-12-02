@@ -4,8 +4,9 @@ import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { Link } from "react-router";
 
 
-import { AuthContext } from "../../Context/AuthContext";
+
 import GoogleSignIn from "../GoogleSignIn";
+import { AuthContext } from "../../Context/AuthProvider";
 
 const Login = () => {
   const { createUser, setUser } = use(AuthContext);

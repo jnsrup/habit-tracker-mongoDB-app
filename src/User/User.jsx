@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../Context/AuthContext";
+
 import { Link, NavLink, useNavigate } from "react-router";
 import { SlLogin } from "react-icons/sl";
+import { AuthContext } from "../Context/AuthProvider";
 
 const User = () => {
 

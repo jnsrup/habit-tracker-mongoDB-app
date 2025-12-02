@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { AuthContext } from '../Context/AuthContext';
+import { AuthContext } from '../Context/AuthProvider';
+
 
 const AddHabits = () => {
     const { user } = useContext(AuthContext);
@@ -42,7 +43,7 @@ const AddHabits = () => {
         <div className='my-20'>
             <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto bg-white shadow-md p-5 rounded-xl"
+      className="max-w-md mx-auto bg-base-300 shadow-md p-5 rounded-xl"
     >
       <h2 className="text-xl font-semibold mb-4">Add New Habit</h2>
 
@@ -65,7 +66,7 @@ const AddHabits = () => {
 
       <select
         name="category"
-        className="w-full p-2 border rounded mb-3"
+        className="w-full bg-base-300 p-2 border rounded mb-3"
         onChange={handleChange}
         required
       >

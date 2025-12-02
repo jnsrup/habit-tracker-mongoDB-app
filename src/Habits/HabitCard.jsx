@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
+import { IoMdTimer } from "react-icons/io";
 
 const HabitCard = ({ habit }) => {
+    
+   
+  
   const [habits, setHabits] = useState([]);
   
     useEffect(() => {
+      
       fetch("http://localhost:3000/habits")
         .then((res) => res.json())
         .then((data) => setHabits(data))
         .catch((error) => console.log("Error:", error));
     }, []);
+    
   
   return (
     <div 
@@ -35,8 +41,8 @@ const HabitCard = ({ habit }) => {
       </span>
 
       {/* Reminder time */}
-      <p className="text-gray-500 text-sm mt-2">
-        ⏰ Reminder: {habit.reminderTime}
+      <p className="text-gray-500 text-sm mt-2 flex items-center gap-2">
+        <span className="text-2xl text-blue-500"><IoMdTimer /></span> Reminder: {habit.reminderTime}
       </p>
 
       {/* User info */}

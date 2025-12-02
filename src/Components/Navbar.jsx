@@ -1,16 +1,18 @@
 
 
-import { AuthContext } from "../Context/AuthContext";
+import { AuthContext } from "../Context/AuthProvider";
 import { SlLogout, SlLogin } from "react-icons/sl";
 import { NavLink } from "react-router";
 import User from "../User/User";
+import ThemeToggle from "./ThemeToggle/ThemeToggle";
 
 const Navbar = () => {
-  
+   
+
   
 
   return (
-   <div className="bg-[#eef0fe] shadow-sm sticky top-0 z-50">
+   <div className="bg-base-200 shadow-sm sticky top-0 z-50">
      <div className="w-11/12 mx-auto ">
       <div className="navbar ">
         <div className="navbar-start">
@@ -48,8 +50,10 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <NavLink className="btn btn-ghost text-xl" to="/">
-            HabiTrack
+          <NavLink className=" text-xl" to="/">
+            <h2 className="text-3xl font-extrabold mb-3">
+            Habit<span className="text-primary">Track</span>
+          </h2>
           </NavLink>
         </div>
 
@@ -58,12 +62,14 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1 gap-5 text-md font-semibold ">
             <NavLink to="/" className={ ({isActive}) => isActive ? "text-red-500 underline" 
             : "text-blue-400"}>Home</NavLink>
+           
+            <NavLink to="/HabitsList" className={ ({isActive}) => isActive ? "text-red-500" 
+            : "text-blue-400"}>Browse Public Habits</NavLink>
             <NavLink to="/AddHabits" className={ ({isActive}) => isActive ? "text-red-500" 
             : "text-blue-400"}>Add Habits</NavLink>
             <NavLink to="/MyHabits" className={ ({isActive}) => isActive ? "text-red-500" 
             : "text-blue-400"}>My Habits</NavLink>
-            <NavLink to="/HabitsList" className={ ({isActive}) => isActive ? "text-red-500" 
-            : "text-blue-400"}>Browse Public Habits</NavLink>
+            
           </ul>
         </div>
 
@@ -73,6 +79,7 @@ const Navbar = () => {
         </div>
 
         <div><User></User></div>
+        <div> <ThemeToggle></ThemeToggle></div>
       </div>
     </div>
    </div>
