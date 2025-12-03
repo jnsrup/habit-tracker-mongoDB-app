@@ -1,17 +1,11 @@
+import React from 'react';
 
-import './App.css'
+const App = () => {
+    return (
+        <div>
+            
+        </div>
+    );
+};
 
-function App() {
- 
-
-  return (
-    <>
-      <div>
-        <h1 className='text-4xl'>habit tracker app</h1>
-      </div>
-      
-    </>
-  )
-}
-
-export default App
+export default App;

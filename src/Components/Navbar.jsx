@@ -39,14 +39,14 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow"
             >
-              <NavLink to="/" className={ ({isActive}) => isActive ? "text-red-500 underline" 
+              <NavLink to="/" className={ ({isActive}) => isActive ? "text-red-400 " 
             : "text-blue-400"}>Home</NavLink>
-            <NavLink to="/AddHabits" className={ ({isActive}) => isActive ? "text-red-500" 
+            <NavLink to="/AddHabits" className={ ({isActive}) => isActive ? "text-red-400" 
             : "text-blue-400"}>Add Habits</NavLink>
-            <NavLink to="/MyHabits" className={ ({isActive}) => isActive ? "text-red-500" 
+            <NavLink to="/MyHabits" className={ ({isActive}) => isActive ? "text-red-400" 
             : "text-blue-400"}>My Habits</NavLink>
-            <NavLink to="/HabitsList" className={ ({isActive}) => isActive ? "text-red-500" 
-            : "text-blue-400"}>Browse Public Habits</NavLink>
+            <NavLink to="/HabitsList" className={ ({isActive}) => isActive ? "text-red-400" 
+            : "text-blue-400"}>Public Habits</NavLink>
             </ul>
           </div>
 
@@ -60,11 +60,11 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-5 text-md font-semibold ">
-            <NavLink to="/" className={ ({isActive}) => isActive ? "text-red-500 underline" 
+            <NavLink to="/" className={ ({isActive}) => isActive ? "text-red-500 " 
             : "text-blue-400"}>Home</NavLink>
            
             <NavLink to="/HabitsList" className={ ({isActive}) => isActive ? "text-red-500" 
-            : "text-blue-400"}>Browse Public Habits</NavLink>
+            : "text-blue-400"}>Public Habits</NavLink>
             <NavLink to="/AddHabits" className={ ({isActive}) => isActive ? "text-red-500" 
             : "text-blue-400"}>Add Habits</NavLink>
             <NavLink to="/MyHabits" className={ ({isActive}) => isActive ? "text-red-500" 

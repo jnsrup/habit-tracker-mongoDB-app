@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Context/AuthProvider';
+import Swal from 'sweetalert2';
 
 
 const AddHabits = () => {
@@ -34,7 +35,13 @@ const AddHabits = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("Habit added:", data);
-        alert("Habit added successfully!");
+        Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Your habit has been added successfully",
+  showConfirmButton: false,
+  timer: 1500
+});
       })
       .catch((err) => console.log(err));
   };
