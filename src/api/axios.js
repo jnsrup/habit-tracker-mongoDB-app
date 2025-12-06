@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-   baseURL: process.env.REACT_APP_API_BASE || "http://localhost:3000",
+   baseURL: process.env.REACT_APP_API_BASE || "https://habittracker-server2.onrender.com",
    timeout:15000,
    headers:{
     "Content-Type" : "application/json",

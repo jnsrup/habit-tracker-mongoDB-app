@@ -27,7 +27,7 @@ const AddHabits = () => {
       userName: user?.displayName,
     };
 
-    fetch("http://localhost:3000/habits", {
+    fetch("https://habittracker-server2.onrender.com/habits", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(habit),

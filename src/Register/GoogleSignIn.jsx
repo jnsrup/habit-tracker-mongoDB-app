@@ -18,6 +18,7 @@ const GoogleSignIn = () => {
 const navigate = useNavigate();
 const location = useLocation();
 
+const from = location.state?.from?.pathname || "/";
 
 const handleGoogleSingIn = () =>{
     
@@ -25,16 +26,17 @@ const handleGoogleSingIn = () =>{
     .then((result) => {
         const user = result.user;
         console.log( "googleLogin user:",user);
-        navigate(`${location.state ? location.state : "/" }`)
+        navigate(from, {replace:true});
     }) 
+     .catch((err)=> console.error(err));
 }
 
     
     return (
-        <div>
+        <div className=''>
             <button
   onClick={handleGoogleSingIn}
-  className="btn btn-neutral flex items-center justify-center gap-2 bg-gray-900 text-white    hover:bg-red-600 transition"
+  className=" btn btn-primary w-70 mt-3 flex items-center justify-center gap-2 bg-gray-900 text-white    hover:bg-red-600 transition"
 >
   <img
     src="https://www.svgrepo.com/show/475656/google-color.svg"

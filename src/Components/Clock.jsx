@@ -12,8 +12,8 @@ const Clock = () => {
     },[]);
     const formatTime = time.toLocaleString()
     return (
-        <div className='text-4xl font-semibold bg-gray-900 text-white p-4 rounded-xl shadow-lg'>
-            {formatTime}
+        <div className='text-md font-semibold flex flex-wrap bg-base-300 text-base-content my-3 p-4 rounded-xl shadow-lg'>
+           <h4> Current Date:</h4>{formatTime}
         </div>
     );
 };

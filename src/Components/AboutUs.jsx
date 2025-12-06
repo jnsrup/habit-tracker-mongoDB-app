@@ -1,11 +1,11 @@
 import React from "react";
-
+ import achivement from "../assets//achievement-5002582_1280.jpg"
 const AboutUs = () => {
   return (
     <div className="w-11/12 mx-auto my-40">
       <div className="flex justify-center gap-6 items-center flex-wrap">
         <div>
-          <img className="max-w-2xl rounded-2xl" src={"/src/assets/achievement-5002582_1280.jpg"} alt="achievement" />
+          <img className="max-w-2xl rounded-2xl" src={achivement} alt="achievement" />
         </div>
 
         <div className="max-w-2xl space-y-3 ">

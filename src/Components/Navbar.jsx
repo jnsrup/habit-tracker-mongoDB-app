@@ -55,7 +55,10 @@ const Navbar = () => {
             Habit<span className="text-primary">Track</span>
           </h2>
           </NavLink>
+          <div className="btn btn-ghost  lg:hidden " > <ThemeToggle></ThemeToggle></div>
         </div>
+                
+
 
         {/* Desktop Menu */}
         <div className="navbar-center hidden lg:flex">
@@ -79,7 +82,7 @@ const Navbar = () => {
         </div>
 
         <div><User></User></div>
-        <div> <ThemeToggle></ThemeToggle></div>
+        <div className="navbar-center hidden lg:flex"> <ThemeToggle></ThemeToggle></div>
       </div>
     </div>
    </div>

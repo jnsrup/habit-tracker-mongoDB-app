@@ -7,6 +7,7 @@ import successAnimation from "../assets/Completed Successfully.json";
 import { AuthContext } from "../Context/AuthProvider";
 import { useNavigate } from "react-router";
 import { reload } from "firebase/auth";
+import Clock from "../Components/Clock";
 
 const MyHabitCard = ({ habit }) => {
   
@@ -30,7 +31,7 @@ const [isLoading, setIsLoading] = useState(false);
   // Load user's habits
   const loadMyHabits = async () => {
      
-    const res = await fetch(`http://localhost:3000/habits?email=${user.email}`);
+    const res = await fetch(`https://habittracker-server2.onrender.com/habits?email=${user.email}`);
     const data = await res.json();
     setHabits(data);
   };
@@ -67,7 +68,7 @@ const [isLoading, setIsLoading] = useState(false);
     try {
       
       const res = await axios.put(
-        `http://localhost:3000/habits/${editingHabit._id}`,
+        `https://habittracker-server2.onrender.com/habits/${editingHabit._id}`,
         updateHabit
       );
 
@@ -99,7 +100,7 @@ const [isLoading, setIsLoading] = useState(false);
       confirmButtonText: "Delete",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await fetch(`http://localhost:3000/habits/${id}`, {
+        const res = await fetch(`https://habittracker-server2.onrender.com/habits/${id}`, {
           method: "DELETE",
         });
 
@@ -116,7 +117,7 @@ const [isLoading, setIsLoading] = useState(false);
   // Daily Streak Handler
   const handleComplete = async (id) => {
     setIsLoading(true);
-    const res = await fetch(`http://localhost:3000/habits/${id}/complete`, {
+    const res = await fetch(`https://habittracker-server2.onrender.com/habits/${id}/complete`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
     });
@@ -165,7 +166,7 @@ const [isLoading, setIsLoading] = useState(false);
               </div>
             ))}
           </div>
-
+             <div> <Clock></Clock> </div>
           {/* Buttons */}
           <div className="mt-4 flex gap-3">
             <button

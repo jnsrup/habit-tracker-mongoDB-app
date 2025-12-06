@@ -17,7 +17,7 @@ const BestHabits =  () => {
           setLoading(true);
       
         
-        fetch("http://localhost:3000/habits")
+        fetch("https://habittracker-server2.onrender.com/habits")
           .then((res) => res.json())
           .then((data) => {
              setHabits(data);

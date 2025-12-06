@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import { SlLogin } from "react-icons/sl";
 import { AuthContext } from "../Context/AuthProvider";
+import Swal from "sweetalert2";
 
 const User = () => {
 
@@ -13,7 +14,13 @@ const User = () => {
   const handleLogOut = () => {
     logOut()
       .then(() => {
-        alert("Logged out successfully");
+        Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Logged out successfully",
+  showConfirmButton: false,
+  timer: 1500
+});;
       })
       .catch((err) => console.error(err));
   };

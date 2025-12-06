@@ -11,7 +11,7 @@ const MyHabits = () => {
   
 
  const loadMyHabits = async() =>{
-  const res = await fetch(`http://localhost:3000/habits/user/${user.email}`)
+  const res = await fetch(`https://habittracker-server2.onrender.com/habits/user/${user.email}`)
    const data = await res.json();
    setHabits(data);
  };

@@ -9,7 +9,7 @@ const HabitCard = ({ habit }) => {
   
     useEffect(() => {
       
-      fetch("http://localhost:3000/habits")
+      fetch("https://habittracker-server2.onrender.com/habits")
         .then((res) => res.json())
         .then((data) => setHabits(data))
         .catch((error) => console.log("Error:", error));

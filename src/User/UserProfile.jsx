@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 
 import { updateProfile } from "firebase/auth";
 import { AuthContext } from "../Context/AuthProvider";
+import Swal from "sweetalert2";
 
 
 
@@ -24,14 +25,21 @@ const UserProfile = () => {
         phoneNumber
       });
       setMessage("Profile updated successfully!");
+      Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Profile updated successfully!",
+  showConfirmButton: false,
+  timer: 1500
+});
     } catch (error) {
       setMessage("Failed to update profile: " + error.message);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl p-6 mt-8">
-      <h2 className="text-2xl font-semibold text-center mb-6">Edit Profile</h2>
+    <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl p-6 my-40">
+      <h2 className="text-2xl text-gray-800 font-semibold text-center mb-6">Edit Profile</h2>
 
       <div className="flex justify-center mb-4">
         <img
@@ -53,7 +61,7 @@ const UserProfile = () => {
             placeholder={displayName}
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
-            className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full border text-gray-800 px-3 py-2 rounded-md focus:outline-none focus:ring  focus:ring-blue-300"
           />
         </div>
 
@@ -63,7 +71,7 @@ const UserProfile = () => {
             type="text"
             value={photoURL}
             onChange={(e) => setPhotoURL(e.target.value)}
-            className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full border text-gray-800 px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
           />
         </div>
 
@@ -74,7 +82,7 @@ const UserProfile = () => {
             placeholder={phoneNumber}
             value={phoneNumber}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full border text-gray-800  px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
           />
         </div>
 
